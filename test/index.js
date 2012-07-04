@@ -35,7 +35,7 @@ function read(stream, callback) {
   })
 }
 
-exports['simple'] = function (test) {
+exports['simple defaults'] = function (test) {
 
   var l = 1000
     , expected = [] 
@@ -57,6 +57,31 @@ exports['simple'] = function (test) {
   write(expected, t)
 }
 
+exports['simple functions'] = function (test) {
+
+  var l = 1000
+    , expected = [] 
+
+  while(l--) expected.push(l * Math.random())
+
+  var t = through(function (data) {
+      this.emit('data', data*2)
+    }) 
+    spec(t)
+      .through()
+      .pausable()
+      .validateOnExit()
+
+  read(t, function (err, actual) {
+    if(err) test.error(err) //fail
+    a.deepEqual(actual, expected.map(function (data) {
+      return data*2
+    }))
+    test.done()
+  })
+
+  write(expected, t)
+}
 exports['pauses'] = function (test) {
 
   var l = 1000
