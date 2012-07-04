@@ -20,3 +20,7 @@ through(function write(data) {
   })
 
 ```
+
+## License
+
+MIT / Apache2
