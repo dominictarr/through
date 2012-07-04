@@ -4,7 +4,12 @@
   "description": "simplified stream contruction",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "asynct test/*.js"
+  },
+  "devDependencies": {
+    "stream-spec": "0",
+    "assertions":  "2",
+    "asynct":"1"
   },
   "keywords": [
     "stream",
