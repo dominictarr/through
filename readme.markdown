@@ -1,5 +1,7 @@
 #through
 
+[![build status](https://secure.travis-ci.org/dominictarr/through.png)](http://travis-ci.org/dominictarr/through)
+
 Easy way to create a `Stream` that is both `readable` and `writable`. Pass in optional `write` and `end` methods. `through` takes care of pause/resume logic.
 Use `this.pause()` and `this.resume()` to manage flow.
 Check `this.paused` to see current flow state. (write always returns `!this.paused`)
