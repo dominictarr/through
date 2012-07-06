@@ -12,25 +12,8 @@ through.through = through
 
 function through (write, end) {
   write = write || function (data) { this.emit('data', data) }
-  end = (
-    'sync'== end || !end
-  //use sync end. (default)
-  ? function () { this.emit('end') }
-  : 'async' == end || end === true 
-  //use async end.
-  //must eventually call drain if paused.
-  //else will not end.
-  ? function () {
-      if(!this.paused)
-        return this.emit('end')
-     var self = this
-     this.once('drain', function () {
-        self.emit('end')
-      })
-    }
-  //use custom end function
-  : end 
-  )
+  end = end || function () { this.emit('end') }
+
   var ended = false, destroyed = false
   var stream = new Stream()
   stream.readable = stream.writable = true
@@ -51,7 +34,9 @@ function through (write, end) {
   })
 
   stream.end = function (data) {
-    if(ended) throw new Error('cannot call end twice')
+    if(ended) return 
+    //this breaks, because pipe doesn't check writable before calling end.
+    //throw new Error('cannot call end twice')
     ended = true
     if(arguments.length) stream.write(data)
     this.writable = false
