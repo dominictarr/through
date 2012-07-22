@@ -52,6 +52,7 @@ function through (write, end) {
     stream.emit('close')
   }
   stream.pause = function () {
+    if(stream.paused) return
     stream.paused = true
     stream.emit('pause')
   }
