@@ -53,6 +53,7 @@ function through (write, end) {
   }
   stream.pause = function () {
     stream.paused = true
+    steam.emit('pause')
   }
   stream.resume = function () {
     if(stream.paused) {
