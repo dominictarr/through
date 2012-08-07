@@ -19,7 +19,7 @@
   ],
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (dominictarr.com)",
   "license": "MIT",
-  "repo": {
+  "repository": {
     "type":"git",
     "url": "https://github.com/dominictarr/through.git"
   },
