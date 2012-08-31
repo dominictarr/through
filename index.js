@@ -59,8 +59,8 @@ function through (write, end) {
   stream.resume = function () {
     if(stream.paused) {
       stream.paused = false
-      stream.emit('drain')
     }
+    stream.emit('drain')
   }
   return stream
 }
