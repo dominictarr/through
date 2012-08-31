@@ -1,6 +1,6 @@
 {
   "name": "through",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "simplified stream contruction",
   "main": "index.js",
   "scripts": {
