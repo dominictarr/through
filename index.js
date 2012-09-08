@@ -5,8 +5,7 @@ var Stream = require('stream')
 // a stream that does nothing but re-emit the input.
 // useful for aggregating a series of changing but not ending streams into one stream)
 
-exports = module.exports = through
-through.through = through
+module.exports = through
 
 //create a readable writable stream.
 
@@ -17,14 +16,14 @@ function through (write, end) {
   var ended = false, destroyed = false
   var stream = new Stream()
   stream.readable = stream.writable = true
-  stream.paused = false  
+  stream.paused = false
   stream.write = function (data) {
     write.call(this, data)
     return !stream.paused
   }
   //this will be registered as the first 'end' listener
   //must call destroy next tick, to make sure we're after any
-  //stream piped from here. 
+  //stream piped from here.
   stream.on('end', function () {
     stream.readable = false
     if(!stream.writable)
@@ -34,7 +33,7 @@ function through (write, end) {
   })
 
   stream.end = function (data) {
-    if(ended) return 
+    if(ended) return
     //this breaks, because pipe doesn't check writable before calling end.
     //throw new Error('cannot call end twice')
     ended = true
