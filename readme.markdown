@@ -21,6 +21,24 @@ through(function write(data) {
 
 ```
 
+or, with buffering on pause, use `this.queue(data)`,
+data *cannot* be `null`. `this.queue(null)` will emit 'end'
+when it gets to the `null` element.
+
+``` js
+var through = require('through')
+
+through(function write(data) {
+    this.queue(data)
+    //this.pause() 
+  },
+  function end () { //optional
+    this.queue(null)
+  })
+
+```
+
+
 ## License
 
 MIT / Apache2
