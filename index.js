@@ -64,8 +64,6 @@ function through (write, end) {
 
   stream.end = function (data) {
     if(ended) return 
-    //this breaks, because pipe doesn't check writable before calling end.
-    //throw new Error('cannot call end twice')
     ended = true
     if(arguments.length) stream.write(data)
     if(!buffer.length) _end()
