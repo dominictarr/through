@@ -20,7 +20,7 @@ function through (write, end) {
   var stream = new Stream(), buffer = []
   stream.buffer = buffer
   stream.readable = stream.writable = true
-  stream.paused = false  
+  stream.paused = false
   stream.write = function (data) {
     write.call(this, data)
     return !stream.paused
@@ -43,7 +43,7 @@ function through (write, end) {
 
   //this will be registered as the first 'end' listener
   //must call destroy next tick, to make sure we're after any
-  //stream piped from here. 
+  //stream piped from here.
   //this is only a problem if end is not emitted synchronously.
   //a nicer way to do this is to make sure this is the last listener for 'end'
 
@@ -63,10 +63,10 @@ function through (write, end) {
   }
 
   stream.end = function (data) {
-    if(ended) return 
+    if(ended) return
     ended = true
     if(arguments.length) stream.write(data)
-    if(!buffer.length) _end()
+    _end() // will emit or queue
   }
 
   stream.destroy = function () {
