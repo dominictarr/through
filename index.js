@@ -13,8 +13,8 @@ through.through = through
 //create a readable writable stream.
 
 function through (write, end) {
-  write = write || function (data) { this.emit('data', data) }
-  end = end || function () { this.emit('end') }
+  write = write || function (data) { this.queue(data) }
+  end = end || function () { this.queue(null) }
 
   var ended = false, destroyed = false, buffer = []
   var stream = new Stream()
