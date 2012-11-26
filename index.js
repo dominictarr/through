@@ -16,11 +16,11 @@ function through (write, end) {
   write = write || function (data) { this.emit('data', data) }
   end = end || function () { this.emit('end') }
 
-  var ended = false, destroyed = false
-  var stream = new Stream(), buffer = []
-  stream.buffer = buffer
+  var ended = false, destroyed = false, buffer = []
+  var stream = new Stream()
   stream.readable = stream.writable = true
   stream.paused = false
+
   stream.write = function (data) {
     write.call(this, data)
     return !stream.paused
