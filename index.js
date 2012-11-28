@@ -39,6 +39,7 @@ function through (write, end) {
   stream.queue = function (data) {
     buffer.push(data)
     drain()
+    return stream
   }
 
   //this will be registered as the first 'end' listener
@@ -67,6 +68,7 @@ function through (write, end) {
     ended = true
     if(arguments.length) stream.write(data)
     _end() // will emit or queue
+    return stream
   }
 
   stream.destroy = function () {
@@ -76,12 +78,14 @@ function through (write, end) {
     buffer.length = 0
     stream.writable = stream.readable = false
     stream.emit('close')
+    return stream
   }
 
   stream.pause = function () {
     if(stream.paused) return
     stream.paused = true
     stream.emit('pause')
+    return stream
   }
   stream.resume = function () {
     if(stream.paused) {
@@ -92,6 +96,7 @@ function through (write, end) {
     //as drain emits 'data'.
     if(!stream.paused)
       stream.emit('drain')
+    return stream
   }
   return stream
 }
