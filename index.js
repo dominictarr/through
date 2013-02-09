@@ -36,7 +36,7 @@ function through (write, end) {
     }
   }
 
-  stream.queue = function (data) {
+  stream.queue = stream.push = function (data) {
     buffer.push(data)
     drain()
     return stream
