@@ -4,12 +4,11 @@
   "description": "simplified stream contruction",
   "main": "index.js",
   "scripts": {
-    "test": "asynct test/*.js"
+    "test": "node test/*.js"
   },
   "devDependencies": {
-    "stream-spec": "0",
-    "assertions":  "2",
-    "asynct":"1"
+    "stream-spec": "~0.3.2",
+    "tape": "~0.2.2"
   },
   "keywords": [
     "stream",
@@ -23,5 +22,14 @@
     "type":"git",
     "url": "https://github.com/dominictarr/through.git"
   },
-  "homepage": "http://github.com/dominictarr/through"
+  "homepage": "http://github.com/dominictarr/through",
+  "testling": {
+    "browsers": [
+      "ie/6..latest",
+      "ff/3.6..latest",
+      "chrome/4..latest",
+      "safari/5.1..latest"
+    ],
+    "files": "test/*.js"
+  }
 }

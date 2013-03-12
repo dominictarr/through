@@ -1,17 +1,18 @@
+var test = require('tape')
 var through = require('..')
 
 // must emit end before close.
 
-exports['end before close'] = function (t) {
+test('end before close', function (assert) {
   var ts = through()
   var ended = false, closed = false
 
   ts.on('end', function () {
-    t.ok(!closed)
+    assert.ok(!closed)
     ended = true
   })
   ts.on('close', function () {
-    t.ok(ended)
+    assert.ok(ended)
     closed = true
   })
 
@@ -19,9 +20,7 @@ exports['end before close'] = function (t) {
   ts.write(2)
   ts.write(3)
   ts.end()
-  t.ok(ended)
-  t.ok(closed)
-
-  t.end()
-
-}
+  assert.ok(ended)
+  assert.ok(closed)
+  assert.end()
+})

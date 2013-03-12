@@ -1,7 +1,7 @@
 
+var test = require('tape')
 var spec = require('stream-spec')
 var through = require('..')
-var a = require('assertions')
 
 /*
   I'm using these two functions, and not streams and pipe
@@ -35,29 +35,29 @@ function read(stream, callback) {
   })
 }
 
-exports['simple defaults'] = function (test) {
+test('simple defaults', function(assert) {
 
   var l = 1000
-    , expected = [] 
+    , expected = []
 
   while(l--) expected.push(l * Math.random())
 
-  var t = through()    
+  var t = through()
     spec(t)
       .through()
       .pausable()
       .validateOnExit()
 
   read(t, function (err, actual) {
-    if(err) test.error(err) //fail
-    a.deepEqual(actual, expected)
-    test.done()
+    assert.ifError(err)
+    assert.deepEqual(actual, expected)
+    assert.end()
   })
 
   write(expected, t)
-}
+});
 
-exports['simple functions'] = function (test) {
+test('simple functions', function(assert) {
 
   var l = 1000
     , expected = [] 
@@ -73,16 +73,17 @@ exports['simple functions'] = function (test) {
       .validateOnExit()
 
   read(t, function (err, actual) {
-    if(err) test.error(err) //fail
-    a.deepEqual(actual, expected.map(function (data) {
+    assert.ifError(err)
+    assert.deepEqual(actual, expected.map(function (data) {
       return data*2
     }))
-    test.done()
+    assert.end()
   })
 
   write(expected, t)
-}
-exports['pauses'] = function (test) {
+})
+
+test('pauses', function(assert) {
 
   var l = 1000
     , expected = [] 
@@ -104,10 +105,10 @@ exports['pauses'] = function (test) {
   })
 
   read(t, function (err, actual) {
-    if(err) test.error(err) //fail
-    a.deepEqual(actual, expected)
-    test.done()
+    assert.ifError(err)
+    assert.deepEqual(actual, expected)
+    assert.end()
   })
 
   write(expected, t)
-}
+})
