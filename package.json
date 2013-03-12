@@ -4,7 +4,7 @@
   "description": "simplified stream contruction",
   "main": "index.js",
   "scripts": {
-    "test": "node test/*.js"
+    "test": "set -e; for t in test/*.js; do node $t; done"
   },
   "devDependencies": {
     "stream-spec": "~0.3.2",
