@@ -7,7 +7,7 @@
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
   "devDependencies": {
-    "stream-spec": "~0.3.3",
+    "stream-spec": "~0.3.4",
     "tape": "~0.2.2"
   },
   "keywords": [
