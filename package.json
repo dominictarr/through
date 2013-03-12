@@ -1,6 +1,6 @@
 {
   "name": "through",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "simplified stream contruction",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (dominictarr.com)",
   "license": "MIT",
   "repository": {
-    "type":"git",
+    "type": "git",
     "url": "https://github.com/dominictarr/through.git"
   },
   "homepage": "http://github.com/dominictarr/through",
