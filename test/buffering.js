@@ -1,8 +1,9 @@
+var test = require('tape')
 var through = require('..')
 
 // must emit end before close.
 
-exports['buffering'] = function (t) {
+test('buffering', function(assert) {
   var ts = through(function (data) {
     this.queue(data)
   }, function () {
@@ -19,24 +20,23 @@ exports['buffering'] = function (t) {
   ts.write(1)
   ts.write(2)
   ts.write(3)
-  t.deepEqual(actual, [1, 2, 3])
+  assert.deepEqual(actual, [1, 2, 3])
   ts.pause()
   ts.write(4)
   ts.write(5)
   ts.write(6)
-  t.deepEqual(actual, [1, 2, 3])
+  assert.deepEqual(actual, [1, 2, 3])
   ts.resume()
-  t.deepEqual(actual, [1, 2, 3, 4, 5, 6])
+  assert.deepEqual(actual, [1, 2, 3, 4, 5, 6])
   ts.pause()
   ts.end()
-  t.ok(!ended)
+  assert.ok(!ended)
   ts.resume()
-  t.ok(ended)
-  t.end()
+  assert.ok(ended)
+  assert.end()
+})
 
-}
-
-exports['buffering has data in queue, when ends'] = function (t) {
+test('buffering has data in queue, when ends', function (assert) {
 
   /*
    * If stream ends while paused with data in the queue,
@@ -62,10 +62,10 @@ exports['buffering has data in queue, when ends'] = function (t) {
   ts.write(2)
   ts.write(3)
   ts.end()
-  t.deepEqual(actual, [], 'no data written yet, still paused')
-  t.ok(!ended, 'end not emitted yet, still paused')
+  assert.deepEqual(actual, [], 'no data written yet, still paused')
+  assert.ok(!ended, 'end not emitted yet, still paused')
   ts.resume()
-  t.deepEqual(actual, [1, 2, 3], 'resumed, all data should be delivered')
-  t.ok(ended, 'end should be emitted once all data was delivered')
-  t.end();
-}
+  assert.deepEqual(actual, [1, 2, 3], 'resumed, all data should be delivered')
+  assert.ok(ended, 'end should be emitted once all data was delivered')
+  assert.end();
+})
