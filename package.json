@@ -26,8 +26,8 @@
   "testling": {
     "browsers": [
       "ie/6..latest",
-      "ff/3.6..latest",
-      "chrome/4..latest",
+      "ff/14..latest",
+      "chrome/24..latest",
       "safari/5.1..latest"
     ],
     "files": "test/*.js"
