@@ -1,7 +1,7 @@
 
 var test = require('tape')
 var spec = require('stream-spec')
-var through = require('..')
+var through = require('../')
 
 /*
   I'm using these two functions, and not streams and pipe

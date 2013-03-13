@@ -1,5 +1,5 @@
 var test = require('tape')
-var through = require('..')
+var through = require('../')
 
 // must emit end before close.
 
