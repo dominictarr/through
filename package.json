@@ -25,9 +25,9 @@
   "homepage": "http://github.com/dominictarr/through",
   "testling": {
     "browsers": [
-      "ie/6..latest",
-      "ff/14..latest",
-      "chrome/24..latest",
+      "ie/8..latest",
+      "ff/15..latest",
+      "chrome/20..latest",
       "safari/5.1..latest"
     ],
     "files": "test/*.js"
