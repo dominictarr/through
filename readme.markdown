@@ -9,7 +9,7 @@ Easy way to create a `Stream` that is both `readable` and `writable`.
 * Use `this.pause()` and `this.resume()` to manage flow.
 * Check `this.paused` to see current flow state. (write always returns `!this.paused`).
 
-This function is the basis for most of the syncronous streams in 
+This function is the basis for most of the synchronous streams in 
 [event-stream](http://github.com/dominictarr/event-stream).
 
 ``` js
