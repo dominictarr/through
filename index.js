@@ -5,14 +5,12 @@ var Stream = require('stream')
 // a stream that does nothing but re-emit the input.
 // useful for aggregating a series of changing but not ending streams into one stream)
 
-
-
 exports = module.exports = through
 through.through = through
 
 //create a readable writable stream.
 
-function through (write, end) {
+function through (write, end, opts) {
   write = write || function (data) { this.queue(data) }
   end = end || function () { this.queue(null) }
 
@@ -20,6 +18,9 @@ function through (write, end) {
   var stream = new Stream()
   stream.readable = stream.writable = true
   stream.paused = false
+
+//  stream.autoPause   = !(opts && opts.autoPause   === false)
+  stream.autoDestroy = !(opts && opts.autoDestroy === false)
 
   stream.write = function (data) {
     write.call(this, data)
@@ -50,7 +51,7 @@ function through (write, end) {
 
   stream.on('end', function () {
     stream.readable = false
-    if(!stream.writable)
+    if(!stream.writable && stream.autoDestroy)
       process.nextTick(function () {
         stream.destroy()
       })
@@ -59,7 +60,7 @@ function through (write, end) {
   function _end () {
     stream.writable = false
     end.call(stream)
-    if(!stream.readable)
+    if(!stream.readable && stream.autoDestroy)
       stream.destroy()
   }
 
@@ -84,12 +85,13 @@ function through (write, end) {
   stream.pause = function () {
     if(stream.paused) return
     stream.paused = true
-    stream.emit('pause')
     return stream
   }
-  stream.resume = function () {
+
+-  stream.resume = function () {
     if(stream.paused) {
       stream.paused = false
+      stream.emit('resume')
     }
     drain()
     //may have become paused again,
