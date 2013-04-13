@@ -38,6 +38,26 @@ through(function write(data) {
   })
 ```
 
+## Extended Options
+
+You will probably not need these 99% of the time.
+
+### autoDestroy=false
+
+By default, `through` emits close when the writable
+and readable side of the stream has ended.
+If that is not desired, set `autoDestroy=false`.
+
+``` js
+var through = require('through')
+
+//like this
+var ts = through(write, end, {autoDestroy: false})
+//or like this
+var ts = through(write, end)
+ts.autoDestroy = false
+```
+
 ## License
 
 MIT / Apache2
