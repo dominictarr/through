@@ -88,7 +88,7 @@ function through (write, end, opts) {
     return stream
   }
 
--  stream.resume = function () {
+  stream.resume = function () {
     if(stream.paused) {
       stream.paused = false
       stream.emit('resume')
