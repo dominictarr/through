@@ -24,3 +24,22 @@ test('end before close', function (assert) {
   assert.ok(closed)
   assert.end()
 })
+
+test('end only once', function (t) {
+
+  var ts = through()
+  var ended = false, closed = false
+
+  ts.on('end', function () {
+    t.equal(ended, false)
+    ended = true
+  })
+
+  ts.queue(null)
+  ts.queue(null)
+  ts.queue(null)
+
+  ts.resume()
+
+  t.end()
+})
