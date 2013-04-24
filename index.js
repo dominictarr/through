@@ -14,7 +14,7 @@ function through (write, end, opts) {
   write = write || function (data) { this.queue(data) }
   end = end || function () { this.queue(null) }
 
-  var ended = false, destroyed = false, buffer = []
+  var ended = false, destroyed = false, buffer = [], _ended = false
   var stream = new Stream()
   stream.readable = stream.writable = true
   stream.paused = false
@@ -38,6 +38,9 @@ function through (write, end, opts) {
   }
 
   stream.queue = stream.push = function (data) {
+//    console.error(ended)
+    if(_ended) return stream
+    if(data == null) _ended = true
     buffer.push(data)
     drain()
     return stream
