@@ -7,7 +7,7 @@ Easy way to create a `Stream` that is both `readable` and `writable`.
 * Pass in optional `write` and `end` methods.
 * `through` takes care of pause/resume logic if you use `this.queue(data)` instead of `this.emit('data', data)`.
 * Use `this.pause()` and `this.resume()` to manage flow.
-* Check `this.paused` to see current flow state. (write always returns `!this.paused`).
+* Check `this.paused` to see current flow state. (`write` always returns `!this.paused`).
 
 This function is the basis for most of the synchronous streams in 
 [event-stream](http://github.com/dominictarr/event-stream).
