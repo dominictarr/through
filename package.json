@@ -1,7 +1,7 @@
 {
   "name": "through",
   "version": "2.3.3",
-  "description": "simplified stream contruction",
+  "description": "simplified stream contsruction",
   "main": "index.js",
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
