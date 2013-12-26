@@ -106,10 +106,12 @@ test('pauses', function(assert) {
   read(t, function (err, actual) {
     assert.ifError(err)
     assert.deepEqual(actual, expected)
-    assert.end()
   })
 
-  t.on('close', s.validate)
+  t.on('close', function () {
+    s.validate()
+    assert.end()
+  })
 
   write(expected, t)
 })
