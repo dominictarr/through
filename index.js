@@ -68,7 +68,7 @@ function through (write, end, opts) {
   }
 
   stream.end = function (data) {
-    if(ended) return
+    if(ended) return stream
     ended = true
     if(arguments.length) stream.write(data)
     _end() // will emit or queue
@@ -76,7 +76,7 @@ function through (write, end, opts) {
   }
 
   stream.destroy = function () {
-    if(destroyed) return
+    if(destroyed) return stream
     destroyed = true
     ended = true
     buffer.length = 0
@@ -86,7 +86,7 @@ function through (write, end, opts) {
   }
 
   stream.pause = function () {
-    if(stream.paused) return
+    if(stream.paused) return stream
     stream.paused = true
     return stream
   }
