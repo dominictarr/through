@@ -31,7 +31,7 @@ function through (write, end, opts) {
     while(buffer.length && !stream.paused) {
       var data = buffer.shift()
       if(null === data)
-        return stream.emit('end')
+        stream.emit('end')
       else
         stream.emit('data', data)
     }
