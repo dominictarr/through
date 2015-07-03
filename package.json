@@ -23,7 +23,7 @@
     "type": "git",
     "url": "https://github.com/dominictarr/through.git"
   },
-  "homepage": "http://github.com/dominictarr/through",
+  "homepage": "https://github.com/dominictarr/through",
   "testling": {
     "browsers": [
       "ie/8..latest",
