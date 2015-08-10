@@ -11,8 +11,11 @@ through.through = through
 //create a readable writable stream.
 
 function through (write, end, opts) {
-  write = write || function (data) { this.queue(data) }
-  end = end || function () { this.queue(null) }
+  write = write || function (data, encoding, cb) { this.queue(data); if (typeof cb === 'function') cb(); }
+  end = end || function (data, encoding, db) { 
+    this.queue((data == null) ? null : data); 
+    _ended = true; 
+    if (typeof cb === 'function') cb(); }
 
   var ended = false, destroyed = false, buffer = [], _ended = false
   var stream = new Stream()
