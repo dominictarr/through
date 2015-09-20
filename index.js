@@ -21,6 +21,9 @@ function through (write, end, opts) {
 
 //  stream.autoPause   = !(opts && opts.autoPause   === false)
   stream.autoDestroy = !(opts && opts.autoDestroy === false)
+  if(opts.errorHandler) {
+    stream.on('error', opts.errorHandler);
+  }
 
   stream.write = function (data) {
     write.call(this, data)
