@@ -3,6 +3,9 @@
   "version": "2.3.8",
   "description": "simplified stream construction",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
