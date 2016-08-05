@@ -6,6 +6,9 @@
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
+  "files": [
+    "index.js"
+  ],
   "devDependencies": {
     "stream-spec": "~0.3.5",
     "tape": "~2.3.2",
