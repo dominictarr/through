@@ -12,7 +12,7 @@ through.through = through
 
 function through (write, end, opts) {
   write = write || function (data) { this.queue(data) }
-  end = end || function () { this.queue(null) }
+  end = end || function () { }
 
   var ended = false, destroyed = false, buffer = [], _ended = false
   var stream = new Stream()
@@ -63,6 +63,7 @@ function through (write, end, opts) {
   function _end () {
     stream.writable = false
     end.call(stream)
+    stream.queue(null)
     if(!stream.readable && stream.autoDestroy)
       stream.destroy()
   }
