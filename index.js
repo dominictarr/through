@@ -61,6 +61,7 @@ function through (write, end, opts) {
   })
 
   function _end () {
+    if (stream.paused) return stream.on('resume', _end)
     stream.writable = false
     end.call(stream)
     if(!stream.readable && stream.autoDestroy)
